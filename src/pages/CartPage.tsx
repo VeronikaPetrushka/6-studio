@@ -1,0 +1,9 @@
+import { Link } from 'react-router-dom'
+import { Minus, Plus, Trash2 } from 'lucide-react'
+import { useShop } from '../context/ShopContext'
+import { money } from '../components/ProductCard'
+export default function CartPage(){
+ const {cart,products,cartTotal,updateQty,remove}=useShop()
+ const items=cart.map(c=>{const p=products.find(x=>x.id===c.productId);const v=p?.variants.find(x=>x.id===c.variantId);return {c,p,v}}).filter(x=>x.p&&x.v)
+ return <section className="cart-page"><div className="cart-title"><span className="eyebrow">YOUR SELECTION</span><h1>Кошик <em>({items.length})</em></h1></div>{!items.length?<div className="empty-cart"><p>Тут поки порожньо.</p><Link to="/catalog" className="cta-solid">До каталогу</Link></div>:<div className="cart-layout"><div className="cart-list">{items.map(({c,p,v})=><article key={`${c.productId}-${c.variantId}`}><img src={v!.image || p!.images[0]} alt={p!.name}/><div><small>{p!.category}</small><h3>{p!.name}</h3><p>{v!.label}</p><strong>{money(v!.price*c.quantity)}</strong></div><div className="cart-qty"><button onClick={()=>updateQty(c.productId,c.variantId,c.quantity-1)}><Minus/></button><span>{c.quantity}</span><button onClick={()=>updateQty(c.productId,c.variantId,c.quantity+1)}><Plus/></button></div><button className="remove-item" onClick={()=>remove(c.productId,c.variantId)}><Trash2/></button></article>)}</div><aside className="cart-summary"><span className="eyebrow">SUMMARY</span><div><span>Товари</span><b>{money(cartTotal)}</b></div><div><span>Доставка</span><b>за тарифами</b></div><div className="total"><span>Разом</span><strong>{money(cartTotal)}</strong></div><Link to="/checkout" className="cta-solid">Оформити замовлення</Link><small>Оплата карткою або при отриманні. Дані в demo-версії зберігаються локально.</small></aside></div>}</section>
+}

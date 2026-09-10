@@ -1,0 +1,2 @@
+import { Link, useParams } from 'react-router-dom'
+export default function SuccessPage(){const {id}=useParams();return <section className="success-page"><span className="success-six">6.</span><span className="eyebrow">ORDER RECEIVED</span><h1>Дякуємо.<br/><em>Це буде красиво.</em></h1><p>Замовлення <b>{id}</b> створено. У production-версії сюди можна підʼєднати email/SMS та реальний payment redirect.</p><Link className="cta-solid" to="/catalog">Продовжити дивитися</Link></section>}
