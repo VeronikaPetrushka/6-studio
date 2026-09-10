@@ -71,7 +71,7 @@ export const defaultProducts: Product[] = [
     id: 'piala', name: 'Піала Esquisite', category: 'Посуд', featured: true,
     tagline: 'Невелика форма з графічною типографікою.',
     description: 'Піала для сніданків, десертів і сервірування. Виразний напис робить її самостійним акцентом.',
-    images: ['/images/piala-1.webp','/images/editorial-06.webp'],
+    images: ['/images/piala-1.webp','/images/piala-2.webp'],
     variants: [{id:'400',label:'400 мл',price:280,stock:16}],
     details: ['12 × 12.8 см', '400 мл', 'кераміка']
   },
